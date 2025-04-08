@@ -1,5 +1,15 @@
 package commands;
 
+/**
+ * The help command.
+ * Gives more information on available commands.
+ * Displays the list of all commands, or in-depth usage for a specific command.
+ * 
+ * usage:
+ * > help
+ * > help <command>
+ * 
+ */
 public class help implements command {
 
     @Override
@@ -8,8 +18,8 @@ public class help implements command {
     }
 
     @Override
-    public void helpMessage() {
-        System.out.println("Shows help pages for commands.");
+    public String helpMessage() {
+        return "Shows help pages for commands.";
     }
 
     @Override
