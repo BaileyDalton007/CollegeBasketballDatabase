@@ -9,7 +9,8 @@ public class cbbdb {
      * When a new command is created (inherits command), add it to this array.
      */
     private static commands.command[] cmdList = {
-        new help()
+        new help(),
+        new transfer(),
     };
 
     public static void main(String[] args) {
