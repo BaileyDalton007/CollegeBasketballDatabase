@@ -9,7 +9,6 @@ public class cbbdb {
      * When a new command is created (inherits command), add it to this array.
      */
     private static commands.command[] cmdList = {
-        new help(),
         new transfer(),
         new replaceCoach(),
     };
@@ -35,7 +34,13 @@ public class cbbdb {
             // If no matching command exists, print an error message.
             command commandObj = getCommand(commandString);
             if (commandObj == null) {
-                System.out.printf("Command \"%s\" not found, try again. \n", commandString);
+                // Special case for 'help' command as it needs all other commands passed into it.
+                if (commandString.equals((new help()).getCMDString())) {
+                    help helpCmd = new help();
+                    helpCmd.run(paramArr, cmdList);
+                } else {
+                    System.out.printf("Command \"%s\" not found, try again. \n", commandString);
+                }
             } else {
                 commandObj.run(paramArr);
             }
