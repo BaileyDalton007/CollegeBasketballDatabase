@@ -11,6 +11,7 @@ public class cbbdb {
     private static commands.command[] cmdList = {
         new help(),
         new transfer(),
+        new replaceCoach(),
     };
 
     public static void main(String[] args) {

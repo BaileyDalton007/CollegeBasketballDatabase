@@ -25,6 +25,7 @@ INSERT INTO coach (fname, lname, age, jobNum, yearHired, careerWins) VALUES
 ('Lisa', 'Smith', 42, 2, 2020, 80),    -- coaID will be 3001
 ('Bob', 'Jones', 63, 1, 2013, 200),	 -- coaID will be 3002
 ('Dan', 'Lee', 57, 1, 2022, 50);	--coaID will be 3003
+('Lebron', 'James', 41, 0, 2025, 600) --coaID will be 3004
 
 -- insert data into college table
 INSERT INTO college (aID, colName, division, numStudents) VALUES

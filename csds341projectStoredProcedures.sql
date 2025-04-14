@@ -1,4 +1,4 @@
-ALTER PROCEDURE transferPlayer
+CREATE PROCEDURE transferPlayer
     @pID INT,
     @new_tID INT,
 	@player_name varchar(40) OUTPUT,
