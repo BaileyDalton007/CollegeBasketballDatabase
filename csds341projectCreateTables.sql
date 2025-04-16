@@ -119,6 +119,31 @@ foreign key(tID) references team,
 foreign key(sID) references sponsorship
 ); 
 
+CREATE NONCLUSTERED INDEX tid_to_col
+ON team (colID);
 
 
+CREATE TRIGGER updateDivision
+ON college
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    UPDATE c
+    SET division = 
+	-- compute the division a college should be in
+        CASE 
+            WHEN i.numStudents < 4000 THEN 3
+            WHEN i.numStudents < 9000 THEN 2
+            ELSE 1
+        END
+    FROM college c
+    INNER JOIN inserted i ON c.colID = i.colID
+    WHERE c.division != 
+	-- don't update divisions if it is already correct
+        CASE 
+            WHEN i.numStudents < 4000 THEN 3
+            WHEN i.numStudents < 9000 THEN 2
+            ELSE 1
+        END
+END
 
