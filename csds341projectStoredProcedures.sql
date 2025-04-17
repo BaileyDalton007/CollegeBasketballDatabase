@@ -225,7 +225,7 @@ BEGIN
 	where fb.tID = @tID
 	select ti.tixID, ti.purDate, ti.section, ti.seatNum, ti.rowNum, ti.price 
 	from tickets as ti
-	where purDate = @purDate
+	where purDate > @purDate
 END; 
 
 
