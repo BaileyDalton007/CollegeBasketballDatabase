@@ -154,8 +154,86 @@ BEGIN
 	WHERE ts.sID = @sID;
 END;
 
+CREATE or ALTER PROCEDURE newSponsor 
+	-- Add the input parameters for the stored procedure here
+	@sID int output,
+	@sName varchar(50), 
+	@contribution int, 
+	@tName varchar(100)
+AS
+BEGIN
+	--insert new sponsor into sponsorhip table 
+	insert into sponsorship(sName, contribution)
+	values (@sName, @contribution)
+	set @sID = SCOPE_IDENTITY(); 
+
+	--inserts relationship into teamSponsors table
+	declare @tID as int; 
+	select @tID = tID from team where tName = @tName
+	insert into teamSponsors(tID, sID)
+	values(@tID, @sID); 
+
+  --select sID, sName, contribution from sponsorship;
+  --select sID, tID from teamSponsors;
+	select sponsorship.sID, team.tID, team.tName, sponsorship.contribution, sponsorship.sName
+	from sponsorship inner join teamSponsors on sponsorship.sID = teamSponsors.sID inner join team on teamSponsors.tID = team.tID
+	where sponsorship.sID = @sID;
+END; 
+
+CREATE or ALTER PROCEDURE followersSoldOut 
+	@tID int,  --need to identitfy the team for which the update it occuring
+	@new_followers int, --to update the followers
+ 
+	--info needed to insert the first ticket
+	@purDate date, 
+	@section1 int, 
+	@seatNum1 int, 
+	@rowNum1 int, 
+	@price1 int, 
+	--info needed to insert the second ticket 
+	@section2 int, 
+	@seatNum2 int, 
+	@rowNum2 int, 
+	@price2 int
+
+AS 
+BEGIN
+  -- update the teams' followers 
+	update fanbase 
+	set followers = @new_followers; 
+
+  -- update the number of sold out games 
+	update fanbase 
+	set numSoldOut = numSoldOut + 1
+	where tID = @tID;
+
+  -- insert first ticket for the sold out game 
+	declare @tixID1 as int; 
+	insert into tickets(purDate, section, seatNum, rowNum, price)
+	values(@purDate, @section1, @seatNum1, @rowNum1, @price1)
+	set @tixID1 = SCOPE_IDENTITY(); 
+	
+  --insert second ticket for the sold out game 
+	declare @tixID2 as int; 
+	insert into tickets( purDate, section, seatNum, rowNum, price)
+	values(@purDate, @section2, @seatNum2, @rowNum2, @price2)
+	set @tixID2 = SCOPE_IDENTITY(); 
+
+	--select statement to show information properly populated 
+	select fb.followers, fb.numSoldOut, fb.tID
+	from fanBase as fb 
+	where fb.tID = @tID
+	select ti.tixID, ti.purDate, ti.section, ti.seatNum, ti.rowNum, ti.price 
+	from tickets as ti
+	where purDate = @purDate
+END; 
+
+
 -- Give dbuser ability to execute this stored procedures
 GRANT EXECUTE ON OBJECT::transferPlayer TO dbuser;
 GRANT EXECUTE ON OBJECT::replaceCoach TO dbuser;
 GRANT EXECUTE ON OBJECT::removePlayer TO dbuser;
 GRANT EXECUTE ON OBJECT::expandSponsorship TO dbuser;
+GRANT EXECUTE ON OBJECT::newSponsor TO dbuser;
+GRANT EXECUTE ON OBJECT::followersSoldOut TO dbuser; 
+
