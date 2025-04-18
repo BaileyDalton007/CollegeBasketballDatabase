@@ -54,7 +54,7 @@ public class followersSoldOut implements command {
                 connection.setAutoCommit(false);
 
                 stmt.setInt(1, tID); 
-                stmt.registerOutParameter(2, java.sql.Types.INTEGER); //new followers
+                stmt.setInt(2, new_followers); //new followers
                 stmt.setDate(3, purDate); //new sponsors contribution
                 stmt.setInt(4, section1); //ticket 1 section
                 stmt.setInt(5, seatNum1); //ticket 1 seat number
