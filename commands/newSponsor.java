@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class newSponsor implements command {
     @Override
     public String getCMDString() {
-        return "newSponsor"; 
+        return "newsponsor"; 
     }
 
     @Override 
@@ -27,6 +27,7 @@ public class newSponsor implements command {
             return; 
         }
 
+        Integer sID = Integer.parseInt(args[0]);
         String sName = args[1];
         int contribution = Integer.parseInt(args[3]); 
         String tName = args[4]; 
@@ -45,8 +46,6 @@ public class newSponsor implements command {
                     stmt.registerOutParameter(3, java.sql.Types.INTEGER); //new sponsors contribution
                     stmt.registerOutParameter(4, java.sql.Types.VARCHAR); //team name
                     stmt.execute();
-
-                    Integer sID = Integer.parseInt(args[0]);
 
                     if (tName == null) {
                         System.out.println(String.format("A team with name %s does not exist", tName));

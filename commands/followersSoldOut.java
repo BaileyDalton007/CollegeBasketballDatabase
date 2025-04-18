@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class followersSoldOut implements command {
     @Override
     public String getCMDString() {
-        return "followersSoldOut"; 
+        return "followerssoldout"; 
     }
 
     @Override 

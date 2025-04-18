@@ -1,4 +1,4 @@
-CREATE PROCEDURE transferPlayer
+CREATE OR ALTER PROCEDURE transferPlayer
     @pID INT,
     @new_tID INT,
 	@player_name varchar(40) OUTPUT,
@@ -37,8 +37,9 @@ BEGIN
 	SELECT @player_name = fname + ' ' + lname  FROM player WHERE pID = @pID;
 	SELECT @new_college_name = colName FROM college WHERE colID = @new_colID;
 END;
+GO
 
-CREATE PROCEDURE replaceCoach
+CREATE OR ALTER PROCEDURE replaceCoach
     @tID INT,
     @new_coaID INT,
 	@old_coach_name varchar(40) OUTPUT,
@@ -70,8 +71,9 @@ BEGIN
 		SELECT colID FROM team WHERE tID = @tID
 	);
 END;
+GO
 
-CREATE PROCEDURE removePlayer
+CREATE OR ALTER PROCEDURE removePlayer
 	@pID int,
 	@player_name varchar (40) output,
 	@college_name varchar (50) output,
@@ -114,8 +116,9 @@ BEGIN
 		@college_name as College,
 		@updated_numStudents as RemainingStudents;
 END;
+GO
 
-CREATE PROCEDURE expandSponsorship
+CREATE OR ALTER PROCEDURE expandSponsorship
 	@sID int,
 	@additionalContribution int,
 	@new_tID int,
@@ -153,6 +156,7 @@ BEGIN
 		ON ts.tID = t.tID
 	WHERE ts.sID = @sID;
 END;
+GO
 
 CREATE or ALTER PROCEDURE newSponsor 
 	-- Add the input parameters for the stored procedure here
@@ -178,7 +182,8 @@ BEGIN
 	select sponsorship.sID, team.tID, team.tName, sponsorship.contribution, sponsorship.sName
 	from sponsorship inner join teamSponsors on sponsorship.sID = teamSponsors.sID inner join team on teamSponsors.tID = team.tID
 	where sponsorship.sID = @sID;
-END; 
+END;
+GO
 
 CREATE or ALTER PROCEDURE followersSoldOut 
 	@tID int,  --need to identitfy the team for which the update it occuring

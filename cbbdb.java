@@ -12,7 +12,9 @@ public class cbbdb {
         new transfer(),
         new replaceCoach(),
         new removePlayer(),
-        new expandSponsorship()
+        new expandSponsorship(),
+        new followersSoldOut(),
+        new newSponsor(),
     };
 
     public static void main(String[] args) {
