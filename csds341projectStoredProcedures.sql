@@ -77,7 +77,7 @@ CREATE OR ALTER PROCEDURE removePlayer
 	@pID int,
 	@player_name varchar (40) output,
 	@college_name varchar (50) output,
-	@updated_numStudents int
+	@updated_numStudents int output
 AS
 BEGIN
 	DECLARE @colID int;
