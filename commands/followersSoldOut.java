@@ -20,7 +20,6 @@ public class followersSoldOut implements command {
         return"Team gains followers and sells out game. \n"+ 
         "Usage: soldOutGame <team id> <new followers> <purchase date> <ticket1 section> <ticket1 seat number> " +
         "<ticket 1 row number> <ticket 1 price> <ticket 2 section> <ticket 2 seat number> <ticket 2 row number> <ticket 2 price>";
-    }";
     }
 
     @Override
