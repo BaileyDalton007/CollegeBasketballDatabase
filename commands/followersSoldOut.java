@@ -40,7 +40,7 @@ public class followersSoldOut implements command {
         int rowNum2 = Integer.parseInt(args[9]);
         int price2 = Integer.parseInt(args[10]); 
 
-        String calledStoredProc = "{call soldOutGame(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+        String calledStoredProc = "{call followersSoldOut(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 
         Connection connection = null; 
 
