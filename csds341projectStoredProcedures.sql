@@ -199,7 +199,10 @@ CREATE or ALTER PROCEDURE followersSoldOut
 	@section2 int, 
 	@seatNum2 int, 
 	@rowNum2 int, 
-	@price2 int
+	@price2 int, 
+
+	--output 
+	@numSoldOut int output
 
 AS 
 BEGIN
