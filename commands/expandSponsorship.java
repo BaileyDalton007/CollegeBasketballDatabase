@@ -19,7 +19,7 @@ public class expandSponsorship implements command {
     @Override
     public String helpMessage() {
         return "Increase a sponsor’s contribution and link to a new team.\n" +
-               "Usage: expandSponsorship <sponsor id> <additional cents> <team id>";
+               "Usage: expandSponsorship <sponsor id> <additional contribution> <team id>";
     }
 
     @Override
@@ -50,7 +50,7 @@ public class expandSponsorship implements command {
                 stmt.execute();
 
                 String sponsorName = stmt.getString(4);
-                int totalCents     = stmt.getInt(5);
+                int totalCont     = stmt.getInt(5);
 
                 if (sponsorName == null) {
                     System.out.println("No sponsor found with ID " + sID);
@@ -58,8 +58,8 @@ public class expandSponsorship implements command {
                 }
 
                 System.out.printf(
-                    "Sponsor %s now contributes %d cents and is linked to team %d.%n",
-                    sponsorName, totalCents, tID
+                    "Sponsor %s now contributes %d and is linked to team %d.%n",
+                    sponsorName, totalCont, tID
                 );
 
                 connection.commit();
