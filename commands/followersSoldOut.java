@@ -70,14 +70,9 @@ public class followersSoldOut implements command {
 
                 int numSoldOut = stmt.getInt(12);       
 
-                if (stmt.wasNull()) { 
-                    System.out.println("Must add all information for each ticket");
-                    throw new SQLException();
-                }
-
                 System.out.printf(
                     "Updated team %d followers to %d, now have %d sold out games%n",
-                    tID, followers, numSoldOut
+                    tID, new_followers, numSoldOut
                 );
 
                 connection.commit();
@@ -96,4 +91,5 @@ public class followersSoldOut implements command {
         }
     }
 }
+
 
