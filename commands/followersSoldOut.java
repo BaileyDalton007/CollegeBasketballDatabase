@@ -68,7 +68,6 @@ public class followersSoldOut implements command {
 
                 stmt.execute();
 
-                int followers = stmt.getInt(2); 
                 int numSoldOut = stmt.getInt(12);       
 
                 if (stmt.wasNull()) { 
