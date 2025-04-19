@@ -160,10 +160,10 @@ GO
 
 CREATE or ALTER PROCEDURE newSponsor 
 	-- Add the input parameters for the stored procedure here
-	@sID int output,
 	@sName varchar(50), 
 	@contribution int, 
-	@tName varchar(100)
+	@tName varchar(100),
+	@sID int output
 AS
 BEGIN
 	--insert new sponsor into sponsorhip table 
