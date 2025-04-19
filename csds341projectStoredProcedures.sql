@@ -234,6 +234,8 @@ BEGIN
 	select ti.tixID, ti.purDate, ti.section, ti.seatNum, ti.rowNum, ti.price 
 	from tickets as ti
 	where purDate = @purDate
+
+	SELECT @numSoldOut = numSoldOut FROM fanbase WHERE tID = @tID
 END; 
 
 

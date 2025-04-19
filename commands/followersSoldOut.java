@@ -74,7 +74,7 @@ public class followersSoldOut implements command {
                     "Updated team %d followers to %d, now have %d sold out games%n",
                     tID, new_followers, numSoldOut
                 );
-
+                
                 connection.commit();
             }
         }

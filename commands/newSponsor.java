@@ -22,7 +22,7 @@ public class newSponsor implements command {
 
     @Override
     public void run(String args[]) { 
-        if (args.length != 4) {
+        if (args.length != 2) {
             System.out.println("Incorrect usage.\n" + helpMessage()); 
             return; 
         }
