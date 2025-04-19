@@ -17,22 +17,21 @@ public class newSponsor implements command {
     @Override 
     public String helpMessage() {
         return "New sponsor enters becomes involved and forms relationship with team. \n"+ 
-        "Usage: newSponsor <new sponsor id> <team id>";
+        "Usage: newSponsor <new sponsor name> <contribution> <team name>";
     }
 
     @Override
     public void run(String args[]) { 
-        if (args.length != 2) {
+        if (args.length != 3) {
             System.out.println("Incorrect usage.\n" + helpMessage()); 
             return; 
         }
 
-        Integer sID = Integer.parseInt(args[0]);
-        String sName = args[1];
-        int contribution = Integer.parseInt(args[3]); 
-        String tName = args[4]; 
+        String sName = args[0];
+        int contribution = Integer.parseInt(args[1]); 
+        String tName = args[2]; 
 
-        String callStoredProc = "{call newSponsor(?, ?, ?, ?)}";
+        String callStoredProc = "{call newSponsor(?, ?, ?)}";
 
         Connection connection = null; 
 
@@ -41,11 +40,14 @@ public class newSponsor implements command {
                 
             try(CallableStatement stmt = connection.prepareCall(callStoredProc)) { 
                     connection.setAutoCommit(false); 
-                    stmt.setInt(1, sID); 
-                    stmt.registerOutParameter(2, java.sql.Types.VARCHAR); //new sponsor name
-                    stmt.registerOutParameter(3, java.sql.Types.INTEGER); //new sponsors contribution
-                    stmt.registerOutParameter(4, java.sql.Types.VARCHAR); //team name
+ 
+                    stmt.setString(1, sName); //new sponsor name
+                    stmt.setInt(2, contribution); //new sponsors contribution
+                    stmt.setString(3, tName); //team name
+                    stmt.registerOutParameter(4, java.sql.Types.INTEGER);
                     stmt.execute();
+
+                    int sID = stmt.getInt(4);
 
                     if (tName == null) {
                         System.out.println(String.format("A team with name %s does not exist", tName));
@@ -57,7 +59,7 @@ public class newSponsor implements command {
                         throw new SQLException();
                     }
 
-                    System.out.println(String.format("New sponsor %s has formed a relationship with the team %s, their contribution in the realtionship is %d", sName, tName, contribution));
+                    System.out.println(String.format("New sponsor %s with ID %s has formed a relationship with the team %s, their contribution in the realtionship is %d%n", sName, sID, tName, contribution));
 
                     connection.commit();
             }   

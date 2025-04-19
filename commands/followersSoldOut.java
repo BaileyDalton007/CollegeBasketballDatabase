@@ -44,7 +44,7 @@ public class followersSoldOut implements command {
         String calledStoredProc = "{call followersSoldOut(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 
         Connection connection = null; 
-
+                
         try {
             connection = 
         DriverManager.getConnection(connectionHandler.connectionUrl);
@@ -74,7 +74,7 @@ public class followersSoldOut implements command {
                     "Updated team %d followers to %d, now have %d sold out games%n",
                     tID, new_followers, numSoldOut
                 );
-                
+
                 connection.commit();
             }
         }
