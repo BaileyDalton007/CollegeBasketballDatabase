@@ -17,7 +17,7 @@ public class newSponsor implements command {
     @Override 
     public String helpMessage() {
         return "New sponsor enters becomes involved and forms relationship with team. \n"+ 
-        "Usage: newSponsor <new sponsor name> <contribution> <team name>";
+        "Usage: newSponsor <new sponsor id> <contribution> <team id>";
     }
 
     @Override
@@ -59,7 +59,7 @@ public class newSponsor implements command {
                         throw new SQLException();
                     }
 
-                    System.out.println(String.format("New sponsor %s with ID %s has formed a relationship with the team %s, their contribution in the realtionship is %d%n", sName, sID, tName, contribution));
+                    System.out.println(String.format("New sponsor %s with ID %s has formed a relationship with the team %s, their contribution in the realtionship is %d%n", sName, sID,  tName, contribution));
 
                     connection.commit();
             }   
